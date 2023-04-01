@@ -5,12 +5,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import *
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OrdinalEncoder
 from sklearn.metrics import accuracy_score
 
-def run(DATASET_PATH, str_cols, yesno_cols, target_col, should_print=True):
+def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_print=True):
     """
     DATASET_PATH: string:    location of csv file to load
-    str_cols:     list(str): column names that contain str/enum values to be encoded
+    onehot_cols:  list(str): column names that contain str/enum values to be encoded
+    enum_cols:    list(str): column names that contain str/enum values to be encoded
     yesno_cols:   list(str): column names that contain yes/no boolean values
     target_col:   string:    target column name
     should_print: bool:      should print process details
@@ -26,10 +28,10 @@ def run(DATASET_PATH, str_cols, yesno_cols, target_col, should_print=True):
     # read with pandas for autodetect of mixed datatypes (int, flaot and string)
     df = pd.read_csv(DATASET_PATH, sep=',', usecols=range(0, last_column_index+1))
     target = df[target_col]
-
-    # mark str_cols as type category
     X = df.drop(columns=target_col)
-    for i in str_cols:
+
+    # mark string columns as type category
+    for i in onehot_cols + enum_cols:
         X[i] = X[i].astype("category")
 
     X[yesno_cols] = X[yesno_cols].replace({"yes": "1", "no": "0"}).astype("int")
@@ -42,10 +44,12 @@ def run(DATASET_PATH, str_cols, yesno_cols, target_col, should_print=True):
     print("train set", X_train.shape, y_train.shape)
     print("test  set", X_test.shape, y_test.shape)
 
-    # one-hot-encode X. This is better than enumeration, because it removes all correlation between the different values of one column.
+    # encode X
     enc = make_column_transformer(
-            (OneHotEncoder(sparse_output=False), X.dtypes == 'category'),
-            remainder='passthrough', verbose_feature_names_out=False)
+            (OneHotEncoder(sparse_output=False), onehot_cols),
+            (OrdinalEncoder(encoded_missing_value=0), enum_cols),
+            remainder='passthrough',
+            verbose_feature_names_out=False)
     # teach encoder with complete frame
     enc.fit(X)
     # apply encoder to split data

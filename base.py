@@ -2,9 +2,7 @@ import classifier
 
 DATASET_PATH = "datasets/base.csv"
 
-# all str_cols are actually containing enumerating strings
-str_cols = [
-    "Id",
+onehot_cols = [
     "Married/Single",
     "House_Ownership",
     "Profession",
@@ -12,11 +10,15 @@ str_cols = [
     "STATE"
 ]
 
+enum_cols = [
+    "Id"
+]
+
 # translate yes/no col to boolean value
 yesno_cols = [
     "Car_Ownership"
 ]
 
-result = classifier.run(DATASET_PATH, str_cols, yesno_cols, "Risk_Flag", True)
+result = classifier.run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, "Risk_Flag", True)
 print("CLASSIFICATION RESULTS:")
 print(result.keys())
