@@ -62,3 +62,8 @@ def run(DATASET_PATH, str_cols, yesno_cols, target_col, should_print=True):
 
     # y_pred: predicted results
     # y_test: actual (expected) results
+
+    return {
+        "y_pred": y_pred,
+        "y_test": y_test
+    }

@@ -18,4 +18,4 @@ yesno_cols = [
 
 result = classifier.run(DATASET_PATH, str_cols, yesno_cols, "Risk_Flag", True)
 print("CLASSIFICATION RESULTS:")
-print(result)
+print(result.keys())
