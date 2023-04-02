@@ -62,12 +62,14 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_pri
 
     y_pred = clf.predict(X_test)
 
-    print("accuracy", accuracy_score(y_pred, y_test))
+    accuracy = accuracy_score(y_pred, y_test)
+    print("accuracy", accuracy)
 
     # y_pred: predicted results
     # y_test: actual (expected) results
 
     return {
         "y_pred": y_pred,
-        "y_test": y_test
+        "y_test": y_test,
+        "accuracy": accuracy
     }

@@ -3,6 +3,8 @@ import classifier
 DATASET_PATH = "datasets/01.csv"
 
 onehot_cols = [
+    "Income",
+    "Age",
     "Married/Single",
     "House_Ownership",
     "Profession",
@@ -11,9 +13,7 @@ onehot_cols = [
 ]
 
 enum_cols = [
-    "Id",
-    "Income",
-    "Age"
+    "Id"
 ]
 
 # translate yes/no col to boolean value
