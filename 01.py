@@ -21,6 +21,6 @@ yesno_cols = [
     "Car_Ownership"
 ]
 
-result = classifier.run(DATASET_PATH, onehot_cols, enum_cols,  yesno_cols, "Risk_Flag", True)
+result = classifier.run(DATASET_PATH, onehot_cols, enum_cols,  yesno_cols, "Risk_Flag", should_print=True)
 print("CLASSIFICATION RESULTS:")
 print(result.keys())

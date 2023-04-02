@@ -8,7 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.metrics import accuracy_score
 
-def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_print=True):
+def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_print=False):
     """
     DATASET_PATH: string:    location of csv file to load
     onehot_cols:  list(str): column names that contain str/enum values to be encoded

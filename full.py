@@ -16,6 +16,6 @@ yesno_cols = [
     "Car_Ownership"
 ]
 
-result = classifier.run(DATASET_PATH, str_cols, [], yesno_cols, "Risk_Flag", True)
+result = classifier.run(DATASET_PATH, str_cols, [], yesno_cols, "Risk_Flag", should_print=True)
 print("CLASSIFICATION RESULTS:")
 print(result.keys())
