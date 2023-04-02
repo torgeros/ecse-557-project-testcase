@@ -40,9 +40,10 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_pri
 
     # split data/target into test and training vectors
     (X_train, X_test, y_train, y_test) = train_test_split(X, y, test_size=0.2)
-    print("data     ", X.shape)
-    print("train set", X_train.shape, y_train.shape)
-    print("test  set", X_test.shape, y_test.shape)
+    if should_print:
+        print("data     ", X.shape)
+        print("train set", X_train.shape, y_train.shape)
+        print("test  set", X_test.shape, y_test.shape)
 
     # encode X
     enc = make_column_transformer(
@@ -63,7 +64,8 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_pri
     y_pred = clf.predict(X_test)
 
     accuracy = accuracy_score(y_pred, y_test)
-    print("accuracy", accuracy)
+    if should_print:
+        print("accuracy", accuracy)
 
     # y_pred: predicted results
     # y_test: actual (expected) results
