@@ -3,6 +3,7 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import *
+from sklearn.neural_network import *
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
@@ -66,8 +67,7 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols 
     X_train = pd.DataFrame(enc.transform(X_train), columns=enc.get_feature_names_out(), index=X_train.index)
     X_test  = pd.DataFrame(enc.transform(X_test ), columns=enc.get_feature_names_out(), index=X_test .index)
 
-    # run simple classifier from assgmt 2
-    clf = LogisticRegression(solver="lbfgs", max_iter=1000)
+    clf = MLPClassifier(solver='adam', alpha=0.0001, hidden_layer_sizes=(5, 2), activation='relu', random_state=1)
     clf.fit(X_train, y_train)
 
     y_pred = clf.predict(X_test)
