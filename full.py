@@ -2,8 +2,7 @@ import classifier
 
 DATASET_PATH = "datasets/full.csv"
 
-# all str_cols are actually containing enumerating strings
-str_cols = [
+onehot_cols = [
     "Married/Single",
     "House_Ownership",
     "Profession",
@@ -11,15 +10,17 @@ str_cols = [
     "STATE"
 ]
 
-# translate yes/no col to boolean value
+enum_cols = [
+    # none
+]
+
 yesno_cols = [
     "Car_Ownership"
 ]
 
-result = classifier.run(DATASET_PATH, str_cols, [], yesno_cols, "Risk_Flag", should_print=True)
+result = classifier.run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, "Risk_Flag", should_print=False)
 print("CLASSIFICATION RESULTS:")
-print(result.keys())
-
+print("accuracy:", result["accuracy"])
 
 
 from sklearn import metrics

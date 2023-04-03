@@ -1,8 +1,8 @@
 
 # this script assures that numbers of 0 <= number of 1
 
-FULL_DATASET_PATH = "../datasets/full.csv"
-DEBIASED_DATASET_PATH = "../datasets/full_debiased.csv"
+FULL_DATASET_PATH = "../datasets/base.csv"
+DEBIASED_DATASET_PATH = "../datasets/base_debiased.csv"
 
 with open(FULL_DATASET_PATH, "r") as f:
     label = f.readline()
