@@ -33,7 +33,7 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols 
     df = pd.read_csv(DATASET_PATH, sep=',', usecols=range(0, last_column_index+1))
 
     # drop elements of drop_cols
-    df.drop(columns=drop_cols)
+    df = df.drop(columns=drop_cols)
     for l in label:
         if l in drop_cols:
             label.remove(l)
