@@ -7,6 +7,7 @@ from sklearn.neural_network import *
 from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
 def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols = [], should_print=False):
@@ -67,7 +68,18 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols 
     X_train = pd.DataFrame(enc.transform(X_train), columns=enc.get_feature_names_out(), index=X_train.index)
     X_test  = pd.DataFrame(enc.transform(X_test ), columns=enc.get_feature_names_out(), index=X_test .index)
 
-    clf = MLPClassifier(solver='adam', alpha=0.0001, hidden_layer_sizes=(5, 2), activation='relu', random_state=1)
+    scaler = StandardScaler()
+    scaler.set_output(transform = "pandas")
+    scaler.fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_test  = scaler.transform(X_test )
+
+    if should_print:
+        print("X_train head ==========================")
+        print(X_train.head())
+        print("=======================================")
+
+    clf = MLPClassifier(solver='adam', alpha=1e-4, hidden_layer_sizes=(12, 5, 2), activation='relu', random_state=1)
     clf.fit(X_train, y_train)
 
     y_pred = clf.predict(X_test)
