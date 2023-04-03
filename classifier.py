@@ -8,7 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.metrics import accuracy_score
 
-def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_print=False):
+def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols = [], should_print=False):
     """
     DATASET_PATH: string:    location of csv file to load
     onehot_cols:  list(str): column names that contain str/enum values to be encoded
@@ -24,9 +24,18 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, should_pri
         # count number of parameters, column count is this plus 1 (for label)
         # therefore, label (last column) has this index
         last_column_index = len(label)
+    if should_print:
+        print("labels:", label)
 
     # read with pandas for autodetect of mixed datatypes (int, flaot and string)
     df = pd.read_csv(DATASET_PATH, sep=',', usecols=range(0, last_column_index+1))
+
+    # drop elements of drop_cols
+    df.drop(columns=drop_cols)
+    for l in label:
+        if l in drop_cols:
+            label.remove(l)
+
     target = df[target_col]
     X = df.drop(columns=target_col)
 
