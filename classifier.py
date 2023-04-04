@@ -10,7 +10,7 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
-def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols = [], should_print=False):
+def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols = [], should_print=False, split_random_state=1234):
     """
     DATASET_PATH: string:    location of csv file to load
     onehot_cols:  list(str): column names that contain str/enum values to be encoded
@@ -50,7 +50,7 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols 
     y = target
 
     # split data/target into test and training vectors
-    (X_train, X_test, y_train, y_test) = train_test_split(X, y, test_size=0.2)
+    (X_train, X_test, y_train, y_test) = train_test_split(X, y, test_size=0.2, random_state=split_random_state)
     if should_print:
         print("data     ", X.shape)
         print("train set", X_train.shape, y_train.shape)
