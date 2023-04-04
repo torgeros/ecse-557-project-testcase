@@ -1,4 +1,5 @@
 import classifier
+import conf_mat_plt
 
 DATASET_PATH = "datasets/full.csv"
 
@@ -22,12 +23,4 @@ result = classifier.run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, "Risk_
 print("CLASSIFICATION RESULTS:")
 print("accuracy:", result["accuracy"])
 
-
-from sklearn import metrics
-import matplotlib.pyplot as plt
-y_test = result["y_test"]; y_pred = result["y_pred"]
-
-confusion_matrix = metrics.confusion_matrix(y_test, y_pred)
-cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [False, True])
-cm_display.plot()
-plt.show()
+conf_mat_plt.plot(result["y_test"], result["y_pred"])

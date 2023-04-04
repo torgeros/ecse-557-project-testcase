@@ -8,7 +8,9 @@ Warning: enum_str does enumerate just fine, but in the case of binned/grouped va
 
 Datasets can be found in `/datasets`.
 
-| filename | description |
-| -------- | ----------- |
-| full     | original dataset as exported from kaggle |
-| base     | blank ID for all entries. all following are based on `base`. Run enum on ID to set to 0 |
+| filename      | description |
+| ------------- | ----------- |
+| full          | original dataset as exported from kaggle |
+| base          | blank ID for all entries. all following are based on `base`. Run enum on ID to set to 0 |
+| base_debiased | as many zero-targets as one-targets. training bias is too big otherwise.
+| b_d_inc_*     | base_debiased, but with income grouped to filename based bin size.
