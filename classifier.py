@@ -79,7 +79,7 @@ def run(DATASET_PATH, onehot_cols, enum_cols, yesno_cols, target_col, drop_cols 
         print(X_train.head())
         print("=======================================")
 
-    clf = MLPClassifier(solver='adam', alpha=1e-4, hidden_layer_sizes=(12, 5, 2), activation='relu', random_state=1)
+    clf = MLPClassifier(solver='adam', alpha=1e-4, hidden_layer_sizes=(12, 5, 2), activation='relu', random_state=1, max_iter=500)
     clf.fit(X_train, y_train)
 
     y_pred = clf.predict(X_test)
