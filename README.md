@@ -1,5 +1,7 @@
 # ECSE 557 Project Test Case
 
+This belongs to a McGill University project. The related dataset modification tool can be found in [elements72/ECSE-557-project](https://github.com/elements72/ECSE-557-project)
+
 ## `classifier.py` usage
 
 Warning: enum_str does enumerate just fine, but in the case of binned/grouped values, they are still not ordered...
